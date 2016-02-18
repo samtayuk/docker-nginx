@@ -17,8 +17,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C300EE8C \
 
 # Configure Nginx and apply fix for long server names and Pass all docker environment
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf \
-  && sed -i 's/^http {/&\n    server_names_hash_bucket_size 64;/g' /etc/nginx/nginx.conf \
-  && sed -i '/^;clear_env = no/s/^;//' /etc/php5/fpm/pool.d/www.conf
+  && sed -i 's/^http {/&\n    server_names_hash_bucket_size 64;/g' /etc/nginx/nginx.conf
 
 # forward request and error logs to docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
